@@ -1,0 +1,179 @@
+Dataset description:
+
+This dataset about phones. The purpose is to estimate price of mobiles due to their features. Here description to every column in dataset: battery_power: Total energy a battery can store in one time measured in mAh blue: Has bluetooth or not clock_speed: speed at which microprocessor executes instructions dual_sim: Has dual sim support or not fc: Front Camera mega pixels four_g: Has 4G or not int_memory: Internal Memory in Gigabytes m_dep: Mobile Depth in cm mobile_wt: Weight of mobile phone n_cores: Number of cores of processor pc: Primary Camera mega pixels px_height: Pixel Resolution Height px_width: Pixel Resolution Width ram: Random Access Memory in Mega Bytes sc_h: Screen Height of mobile in cm sc_w: Screen Width of mobile in cm talk_time: longest time that a single battery charge will last when you are three_g: Has 3G or not touch_screen: Has touch screen or not wifi: Has wifi or not price_range: This is the target variable with value of 0(low cost), 1(medium cost), 2(high cost) and 3(very high cost).
+
+Iteration 1
+
+
+# Feature name and description: 'battery_per_ram'
+# Usefulness: This feature indicates how much battery power there is per unit of RAM. This could be useful in determining the price range as phones with higher RAM and battery power might be more expensive.
+# Input samples: 'battery_power': [1923.0, 633.0, 1236.0], 'ram': [1489.0, 3560.0, 1406.0]
+df['battery_per_ram'] = df['battery_power'] / df['ram']
+Performance before adding features ROC 0.971, ACC 0.999. Performance after adding features ROC 0.963, ACC 0.998. Improvement ROC -0.007, ACC -0.001. The last code changes to ´df´ were discarded. (Improvement: -0.007744293710576944)
+
+Iteration 2
+
+
+# Feature name and description: 'px_area'
+# Usefulness: This feature indicates the total pixel area of the phone screen. Phones with larger pixel area might be more expensive.
+# Input samples: 'px_height': [767.0, 529.0, 517.0], 'px_width': [1759.0, 1009.0, 809.0]
+df['px_area'] = df['px_height'] * df['px_width']
+Performance before adding features ROC 0.971, ACC 0.999. Performance after adding features ROC 0.970, ACC 0.999. Improvement ROC -0.001, ACC -0.000. The last code changes to ´df´ were discarded. (Improvement: -0.0010876903215265576)
+
+
+Iteration 3
+
+
+# Feature name and description: 'sc_area'
+# Usefulness: This feature indicates the total screen area of the phone. Phones with larger screen area might be more expensive.
+# Input samples: 'sc_h': [10.0, 11.0, 14.0], 'sc_w': [9.0, 1.0, 12.0]
+df['sc_area'] = df['sc_h'] * df['sc_w']
+Performance before adding features ROC 0.971, ACC 0.999. Performance after adding features ROC 0.969, ACC 0.999. Improvement ROC -0.001, ACC -0.000. The last code changes to ´df´ were discarded. (Improvement: -0.0013978342576996816)
+
+Iteration 4
+
+
+# Feature name and description: 'wt_per_ram'
+# Usefulness: This feature indicates how much weight there is per unit of RAM. This could be useful in determining the price range as phones with higher RAM and lower weight might be more expensive.
+# Input samples: 'mobile_wt': [191.0, 139.0, 188.0], 'ram': [1489.0, 3560.0, 1406.0]
+df['wt_per_ram'] = df['mobile_wt'] / df['ram']
+Performance before adding features ROC 0.971, ACC 0.999. Performance after adding features ROC 0.965, ACC 0.998. Improvement ROC -0.006, ACC -0.001. The last code changes to ´df´ were discarded. (Improvement: -0.006539389677821861)
+
+
+Iteration 5
+
+
+# Explanation why the column 'm_dep' is dropped
+# This column represents the Mobile Depth in cm, which is not a significant factor in determining the price range of a mobile phone. 
+# Therefore, it can be dropped to reduce the dimensionality of the dataset and potentially improve the model's performance.
+df.drop(columns=['m_dep'], inplace=True)
+Performance before adding features ROC 0.971, ACC 0.999. Performance after adding features ROC 0.971, ACC 0.999. Improvement ROC 0.001, ACC 0.000. The code was executed and changes to ´df´ were kept.
+
+
+Iteration 6
+
+
+# Feature name and description: 'battery_per_int_memory'
+# Usefulness: This feature indicates how much battery power there is per unit of internal memory. This could be useful in determining the price range as phones with higher internal memory and battery power might be more expensive.
+# Input samples: 'battery_power': [1923.0, 633.0, 1236.0], 'int_memory': [46.0, 49.0, 57.0]
+df['battery_per_int_memory'] = df['battery_power'] / df['int_memory']
+Performance before adding features ROC 0.971, ACC 0.999. Performance after adding features ROC 0.974, ACC 0.999. Improvement ROC 0.002, ACC -0.000. The code was executed and changes to ´df´ were kept.
+
+
+Iteration 7
+
+
+# Feature name and description: 'camera_quality'
+# Usefulness: This feature indicates the quality of the camera by combining the megapixels of the front and primary cameras. Higher quality cameras might be found in more expensive phones.
+# Input samples: 'fc': [7.0, 0.0, 2.0], 'pc': [10.0, 1.0, 14.0]
+df['camera_quality'] = df['fc'] + df['pc']
+Performance before adding features ROC 0.974, ACC 0.999. Performance after adding features ROC 0.972, ACC 0.999. Improvement ROC -0.002, ACC 0.000. The last code changes to ´df´ were discarded. (Improvement: -0.0015397458851331702)
+
+
+Iteration 8
+
+
+# Explanation why the column 'touch_screen' is dropped
+# The presence of a touch screen is a common feature in most mobile phones and does not significantly affect the price range. Therefore, this column can be dropped to reduce dimensionality and potentially improve the model's performance.
+df.drop(columns=['touch_screen'], inplace=True)
+Performance before adding features ROC 0.974, ACC 0.999. Performance after adding features ROC 0.973, ACC 0.999. Improvement ROC -0.000, ACC 0.000. The last code changes to ´df´ were discarded. (Improvement: -0.0002801223353815496)
+
+
+Iteration 9
+
+
+# Feature name and description: 'talk_time_per_battery_power'
+# Usefulness: This feature indicates how long the battery lasts per unit of battery power. This could be useful in determining the price range as phones with higher battery efficiency might be more expensive.
+# Input samples: 'talk_time': [3.0, 16.0, 20.0], 'battery_power': [1923.0, 633.0, 1236.0]
+df['talk_time_per_battery_power'] = df['talk_time'] / df['battery_power']
+Performance before adding features ROC 0.974, ACC 0.999. Performance after adding features ROC 0.971, ACC 0.999. Improvement ROC -0.002, ACC -0.000. The last code changes to ´df´ were discarded. (Improvement: -0.0025560319017111643)
+
+ 
+Iteration 10
+
+
+# Explanation why the column 'wifi' is dropped
+# The presence of wifi is a common feature in most mobile phones and does not significantly affect the price range. Therefore, this column can be dropped to reduce dimensionality and potentially improve the model's performance.
+df.drop(columns=['wifi'], inplace=True)
+Performance before adding features ROC 0.974, ACC 0.999. Performance after adding features ROC 0.973, ACC 0.999. Improvement ROC -0.001, ACC 0.000. The last code changes to ´df´ were discarded. (Improvement: -0.0008769412091494955)
+
+Iteration 11
+
+
+# Feature name and description: 'px_per_sc'
+# Usefulness: This feature indicates the pixel density of the screen. Phones with higher pixel density might be more expensive.
+# Input samples: 'px_height': [767.0, 529.0, 517.0], 'px_width': [1759.0, 1009.0, 809.0], 'sc_h': [10.0, 11.0, 14.0], 'sc_w': [9.0, 1.0, 12.0]
+df['px_per_sc'] = (df['px_height'] * df['px_width']) / (df['sc_h'] * df['sc_w'])
+Performance before adding features ROC 0.974, ACC 0.999. Performance after adding features ROC 0.969, ACC 0.999. Improvement ROC -0.004, ACC -0.000. The last code changes to ´df´ were discarded. (Improvement: -0.004402468022671968)
+
+  
+Iteration 12
+
+
+# Feature name and description: 'speed_per_core'
+# Usefulness: This feature indicates the speed per core of the processor. Phones with higher speed per core might be more expensive.
+# Input samples: 'clock_speed': [0.5, 2.2, 0.9], 'n_cores': [1.0, 8.0, 1.0]
+df['speed_per_core'] = df['clock_speed'] / df['n_cores']
+Performance before adding features ROC 0.974, ACC 0.999. Performance after adding features ROC 0.972, ACC 0.999. Improvement ROC -0.002, ACC -0.000. The last code changes to ´df´ were discarded. (Improvement: -0.0015737461526444951)
+
+Iteration 13
+
+
+# Explanation why the column 'three_g' is dropped
+# The presence of 3G is a common feature in most mobile phones and does not significantly affect the price range. Therefore, this column can be dropped to reduce dimensionality and potentially improve the model's performance.
+df.drop(columns=['three_g'], inplace=True)
+Performance before adding features ROC 0.974, ACC 0.999. Performance after adding features ROC 0.972, ACC 0.999. Improvement ROC -0.002, ACC 0.000. The last code changes to ´df´ were discarded. (Improvement: -0.0014763261872630107)
+
+Iteration 14
+
+
+# Feature name and description: 'memory_per_ram'
+# Usefulness: This feature indicates the amount of internal memory per unit of RAM. Phones with higher memory per RAM might be more expensive.
+# Input samples: 'int_memory': [46.0, 49.0, 57.0], 'ram': [1489.0, 3560.0, 1406.0]
+df['memory_per_ram'] = df['int_memory'] / df['ram']
+Performance before adding features ROC 0.974, ACC 0.999. Performance after adding features ROC 0.969, ACC 0.999. Improvement ROC -0.005, ACC -0.000. The last code changes to ´df´ were discarded. (Improvement: -0.005353503785344937)
+
+
+Iteration 15
+
+
+# Feature name and description: 'battery_per_px'
+# Usefulness: This feature indicates how much battery power there is per pixel. Phones with higher battery power and pixel resolution might be more expensive.
+# Input samples: 'battery_power': [1923.0, 633.0, 1236.0], 'px_height': [767.0, 529.0, 517.0], 'px_width': [1759.0, 1009.0, 809.0]
+df['battery_per_px'] = df['battery_power'] / (df['px_height'] * df['px_width'])
+Performance before adding features ROC 0.974, ACC 0.999. Performance after adding features ROC 0.973, ACC 0.999. Improvement ROC -0.001, ACC 0.000. The last code changes to ´df´ were discarded. (Improvement: -0.0011936124002713822)
+
+
+Iteration 16
+
+
+# Explanation why the column 'four_g' is dropped
+# The presence of 4G is a common feature in most mobile phones and does not significantly affect the price range. Therefore, this column can be dropped to reduce dimensionality and potentially improve the model's performance.
+df.drop(columns=['four_g'], inplace=True)
+Performance before adding features ROC 0.974, ACC 0.999. Performance after adding features ROC 0.976, ACC 0.999. Improvement ROC 0.002, ACC 0.000. The code was executed and changes to ´df´ were kept.
+
+Iteration 17
+
+
+# Feature name and description: 'wt_per_px'
+# Usefulness: This feature indicates how much weight there is per pixel. Phones with higher pixel resolution and lower weight might be more expensive.
+# Input samples: 'mobile_wt': [191.0, 139.0, 188.0], 'px_height': [767.0, 529.0, 517.0], 'px_width': [1759.0, 1009.0, 809.0]
+df['wt_per_px'] = df['mobile_wt'] / (df['px_height'] * df['px_width'])
+Performance before adding features ROC 0.976, ACC 0.999. Performance after adding features ROC 0.973, ACC 0.999. Improvement ROC -0.002, ACC -0.000. The last code changes to ´df´ were discarded. (Improvement: -0.0023340358737293787)
+
+Iteration 18
+
+
+# Feature name and description: 'talk_time_per_core'
+# Usefulness: This feature indicates how long the battery lasts per core of the processor. Phones with higher battery efficiency and more cores might be more expensive.
+# Input samples: 'talk_time': [3.0, 16.0, 20.0], 'n_cores': [1.0, 8.0, 1.0]
+df['talk_time_per_core'] = df['talk_time'] / df['n_cores']
+Performance before adding features ROC 0.976, ACC 0.999. Performance after adding features ROC 0.972, ACC 0.999. Improvement ROC -0.004, ACC -0.000. The last code changes to ´df´ were discarded. (Improvement: -0.0037682573320786394)
+
+Iteration 19
+
+
+# Explanation why the column 'blue' is dropped
+# The presence of Bluetooth is a common feature in most mobile phones and does not significantly affect the price range. Therefore, this column can be dropped to reduce dimensionality and potentially improve the model's performance.
+df.drop(columns=['blue'], inplace=True)
+Performance before adding features ROC 0.976, ACC 0.999. Performance after adding features ROC 0.972, ACC 0.999. Improvement ROC -0.003, ACC -0.000. The last code changes to ´df´ were discarded. (Improvement: -0.0031872727234910636)
